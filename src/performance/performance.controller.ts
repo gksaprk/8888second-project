@@ -14,7 +14,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { PerformanceService } from './performance.service';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from 'src/user/types/userRole.type';
-import { FileInterceptor } from '@nestjs/platform-express';
+
 import { PerformanceDto } from './dto/performance.dto';
 import { title } from 'process';
 
