@@ -40,15 +40,7 @@ export class PerformanceService {
     image: string,
     category: string,
   ) {
-    const createdperformance = await this.performanceRepository.save({
-      title: title,
-      description: description,
-      date: date,
-      place: place,
-      seat: seat,
-      image: image,
-      category: category,
-    });
+    const createdperformance = await this.performanceRepository.save({});
 
     return createdperformance;
   }

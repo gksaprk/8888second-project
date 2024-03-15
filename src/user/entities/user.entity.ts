@@ -1,9 +1,11 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { Role } from '../types/userRole.type';
@@ -13,21 +15,27 @@ import { Role } from '../types/userRole.type';
   name: 'users',
 })
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
 
-  @Column({ type: 'varchar', unique: true, nullable: false })
+  @Column({ unique: true })
   email: string;
 
-  @Column({ type: 'varchar', select: false, nullable: false })
+  @Column()
   password: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column()
   nickname: string;
 
-  @Column({ nullable: false })
+  @Column({ unsigned: true })
   points: number;
 
-  @Column({ type: 'enum', enum: Role, default: Role.User })
-  role: Role;
+  @Column()
+  isAdmin: boolean;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

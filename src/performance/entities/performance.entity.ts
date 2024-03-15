@@ -1,30 +1,47 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { PerformanceCategory } from '../types/performance.category.type';
+import { Schedule } from './schedule.entity';
 
 @Entity({
   name: 'performances',
 })
 export class Performance {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
 
-  @Column({ type: 'varchar', unique: true, nullable: false })
+  @Column({ unique: true })
   title: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'text' })
   description: string;
 
-  @Column({ type: 'datetime', array: true })
-  date: Date[];
+  @Column({ type: 'enum', enum: PerformanceCategory })
+  category: PerformanceCategory;
 
-  @Column({ type: 'varchar' })
+  @Column()
   place: string;
 
-  @Column({ type: 'varchar' })
-  seat: string;
+  @Column()
+  price: string;
 
-  @Column({ type: 'varchar' })
-  image: string;
+  @Column()
+  thumbnail: string;
 
-  @Column({ type: 'varchar' })
-  category: string;
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @OneToMany((type) => Schedule, (schedule) => schedule.performance, {
+    cascade: true,
+  })
+  schedules: Schedule;
 }

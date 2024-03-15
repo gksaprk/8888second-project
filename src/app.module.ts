@@ -10,6 +10,7 @@ import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
 import { PerformanceModule } from './performance/performance.module';
+import { BookModule } from './book/book.module';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -22,7 +23,7 @@ const typeOrmModuleOptions = {
     host: configService.get('DB_HOST'),
     port: configService.get('DB_PORT'),
     database: configService.get('DB_NAME'),
-    entities: [User], // 엔티티는 반드시 여기에 명시!
+    entities: [User, Performance], // 엔티티는 반드시 여기에 명시!
     synchronize: configService.get('DB_SYNC'),
     logging: true,
   }),
@@ -48,6 +49,7 @@ const typeOrmModuleOptions = {
     UserModule,
     ProfileModule,
     PerformanceModule,
+    BookModule,
   ],
   controllers: [],
   providers: [],
